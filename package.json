@@ -7,6 +7,7 @@
         "@scandipwa/scandipwa": "4.5.1",
         "@scandipwa/scandipwa-scripts": "2.4.14",
         "@tilework/mosaic": "0.1.4",
+        "react-intl": "^5.20.6",
         "simi-pagebuilder-react": "^1.2.3"
     },
     "scandipwa": {
