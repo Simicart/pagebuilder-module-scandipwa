@@ -48,7 +48,7 @@ scandipwa extension <EXTENSION NAME>
 
 > **Note**: to create new extension add `--create` option after the command. This will create a new extension package under `packages` folder.
 
-### Note
+## Note
 
 * Files need to strictly follow eslint to be able to compile (a.k.a Please use eslint)
 * Change `proxy` field in `package.json` to your backend.

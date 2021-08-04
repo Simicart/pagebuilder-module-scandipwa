@@ -8,7 +8,8 @@
         "@scandipwa/scandipwa-scripts": "2.4.14",
         "@tilework/mosaic": "0.1.4",
         "react-intl": "^5.20.6",
-        "simi-pagebuilder-react": "^1.2.3"
+        "simi-pagebuilder-react": "^1.2.3",
+        "expose-webpack": "file:packages/expose-webpack"
     },
     "scandipwa": {
         "type": "theme",
@@ -16,11 +17,15 @@
             "en_US": true
         },
         "parentTheme": "@scandipwa/scandipwa",
-        "extensions": {}
+        "extensions": {
+            "expose-webpack": true
+        }
     },
     "scripts": {
         "start": "scandipwa-scripts start",
-        "build": "scandipwa-scripts build"
+        "build": "scandipwa-scripts build",
+        "postinstall": "scandipwa-scripts link",
+        "postupdate": "scandipwa-scripts link"
     },
     "browserslist": {
         "production": [
@@ -37,5 +42,5 @@
     "eslintConfig": {
         "extends": "@scandipwa"
     },
-    "proxy": "https://40kskudemo.scandipwa.com/"
+    "proxy": "https://magento.test"
 }
