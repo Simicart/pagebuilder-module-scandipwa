@@ -1,5 +1,5 @@
 {
-    "name": "scandi-integrate",
+    "name": "scandi-smpagebuilder",
     "version": "0.0.1",
     "license": "OSL-3.0",
     "dependencies": {
@@ -37,5 +37,5 @@
     "eslintConfig": {
         "extends": "@scandipwa"
     },
-    "proxy": "https://40kskudemo.scandipwa.com/"
+    "proxy": "https://scandipwa.pwa-commerce.com/"
 }
