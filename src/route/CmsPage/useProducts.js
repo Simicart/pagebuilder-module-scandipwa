@@ -1,187 +1,75 @@
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import React, { useState, useEffect } from 'react';
+import ProductListQuery from '@scandipwa/scandipwa/src/query/ProductList.query';
+import { useQuery } from 'Route/CmsPage/useQuery';
 
-const ItemFragment = gql`
-    fragment ItemFragment on ProductInterface {
-        id
-        name
-        sku
-        small_image {
-            url
-            label
-            __typename
-        }
-        thumbnail {
-            url
-            label
-            __typename
-        }
-        short_description {
-            html
-            __typename
-        }
-        url_key
-        url_suffix
-        special_price
-        special_from_date
-        type_id
-        special_to_date
-        stock_status
-        price {
-            regularPrice {
-                amount {
-                    currency
-                    value
-                }
-                adjustments {
-                    amount {
-                        currency
-                        value
-                    }
-                    code
-                    description
-                }
-            }
-            minimalPrice {
-                amount {
-                    currency
-                    value
-                }
-                adjustments {
-                    amount {
-                        currency
-                        value
-                    }
-                    code
-                    description
-                }
-            }
-            maximalPrice {
-                amount {
-                    currency
-                    value
-                }
-                adjustments {
-                    amount {
-                        currency
-                        value
-                    }
-                    code
-                    description
-                }
-            }
-        }
-        ... on ConfigurableProduct {
-            configurable_options {
-                attribute_code
-                attribute_id
-                id
-                label
-                values {
-                    default_label
-                    label
-                    store_label
-                    use_default_value
-                    value_index
-                    swatch_data {
-                        ... on ImageSwatchData {
-                            thumbnail
-                        }
-                        value
-                    }
-                }
-            }
-            variants {
-                attributes {
-                    code
-                    value_index
-                }
-                product {
-                    id
-                    media_gallery_entries {
-                        id
-                        disabled
-                        file
-                        label
-                        position
-                    }
-                    sku
-                    stock_status
-                    price {
-                        regularPrice {
-                            amount {
-                                currency
-                                value
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        price_tiers {
-            quantity
-            final_price {
-            value
-            currency
-            }
-        }
-        rating_summary
-        review_count
-    }
-`;
+export const useProducts = (props) => {
+    const {
+        item,
+        formatMessage,
+        defaultPageSize = 12,
+        beginCategory = 6
+    } = props;
 
-const GET_PRODUCTS = gql`
-    query getProducts(
-        $pageSize: Int!
-        $currentPage: Int!
-        $filters: ProductAttributeFilterInput!
-        $sort: ProductAttributeSortInput
-    ) {
-        products(
-            pageSize: $pageSize
-            currentPage: $currentPage
-            filter: $filters
-            sort: $sort
-        ) {
-            total_count
-            items {
-                ...ItemFragment
-            }
-            page_info {
-                total_pages
-            }
-            aggregations {
-                label
-                count
-                attribute_code
-                options {
-                    label
-                    value
+    let filterData = { category_id: { eq: beginCategory } };
+    let sortData;
+    let pageSize = defaultPageSize;
+
+    if (item.dataParsed) {
+        const { dataParsed } = item;
+        if (dataParsed.openProductsWidthSKUs) {
+            let openProductsWidthSKUs = item.dataParsed.openProductsWidthSKUs;
+            openProductsWidthSKUs = openProductsWidthSKUs.trim();
+            openProductsWidthSKUs = openProductsWidthSKUs.split(',');
+            filterData = {
+                sku: {
+                    in: openProductsWidthSKUs
                 }
-            }
+            };
+        } else if (dataParsed.openCategoryProducts) {
+            filterData = { category_id: { eq: String(dataParsed.openCategoryProducts) } };
+        }
+        if (dataParsed.openProductsWidthSortAtt) {
+            const directionToSort = dataParsed.openProductsWidthSortDir ? dataParsed.openProductsWidthSortDir.toUpperCase() : 'ASC';
+            sortData = {};
+            sortData[dataParsed.openProductsWidthSortAtt] = directionToSort;
+        }
+        if (dataParsed.openProductsWidthSortPageSize) {
+            pageSize = parseInt(dataParsed.openProductsWidthSortPageSize);
         }
     }
-    ${ItemFragment}
-`;
 
-export const useProducts = props => {
-    const { filterData, pageSize, sortData } = props;
-    const variables = {
-        currentPage: 1,
-        pageSize: pageSize ? pageSize : 12,
-        filters: filterData
-    };
-    if (sortData)
-        variables.sort = sortData;
-    const result = useQuery(
-        GET_PRODUCTS,
-        {
-            variables,
-            fetchPolicy: 'cache-and-network'
+    const q = ProductListQuery.getQuery({
+        args: {
+            filter: {
+                categoryIds: parseInt(filterData.category_id.eq)
+            },
+            pageSize: pageSize,
+            sort: sortData
         }
-    )
-    const { data, loading } = result;
+    });
+    const {
+        data,
+        loading,
+        error,
+        refetch
+    } = useQuery(q);
+
+    const canRender = !!(data && data.products && data.products.items && data.products.items.length);
+
+    const wholeName = formatMessage({ val: item.name });
+
     return {
-        data, loading
-    }
-}
+        data,
+        loading,
+        item,
+        formatMessage,
+        filterData,
+        sortData,
+        pageSize,
+        query: q,
+        error,
+        refetch,
+        canRender,
+        wholeName
+    };
+};
