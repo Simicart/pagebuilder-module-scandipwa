@@ -5,10 +5,11 @@ import { Placeholder } from 'Route/CmsPage/Placeholder';
 
 import { endPoint, maskedId } from './CmsPage.config';
 import { Fragment } from 'react';
-import CategoryQuery from '@scandipwa/scandipwa/src/query/Category.query';
-import { fetchQuery } from '@scandipwa/scandipwa/src/util/Request';
 import { Category } from 'Route/CmsPage/Category/Category';
 import ProductList from 'Route/CmsPage/ProductList/ProductList';
+import ProductGrid from 'Route/CmsPage/ProductGrid/ProductGrid';
+import { ProductScroll } from 'Route/CmsPage/ProductScroll/ProductScroll';
+import { CategoryScroll } from 'Route/CmsPage/CategoryScroll/CategoryScroll';
 
 export function CmsPageContainer() {
 
@@ -20,11 +21,10 @@ export function CmsPageContainer() {
                 toPreview={false}
                 Category={Category}
                 ProductList={ProductList}
-                ProductGrid={Placeholder}
-                ProductScroll={Placeholder}
-                CategoryScroll={Placeholder}
+                ProductGrid={ProductGrid}
+                ProductScroll={ProductScroll}
+                CategoryScroll={CategoryScroll}
             />
-            <h1>Hello</h1>
         </Fragment>
     );
 }

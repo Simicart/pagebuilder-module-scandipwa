@@ -7,7 +7,7 @@ export const useProducts = (props) => {
         item,
         formatMessage,
         defaultPageSize = 12,
-        beginCategory = 6
+        beginCategory = null
     } = props;
 
     let filterData = { category_id: { eq: beginCategory } };
@@ -38,7 +38,7 @@ export const useProducts = (props) => {
         }
     }
 
-    const q = ProductListQuery.getQuery({
+    const q = filterData.category_id.eq ? ProductListQuery.getQuery({
         args: {
             filter: {
                 categoryIds: parseInt(filterData.category_id.eq)
@@ -46,7 +46,8 @@ export const useProducts = (props) => {
             pageSize: pageSize,
             sort: sortData
         }
-    });
+    }) : null;
+
     const {
         data,
         loading,

@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
 import { useProducts } from 'Route/CmsPage/useProducts';
 import './ProductList.scss';
+import Loader from '@scandipwa/scandipwa/src/component/Loader';
 
 const ProductList = props => {
     const {
@@ -42,7 +43,7 @@ const ProductList = props => {
             </div>
         );
     } else if (loading) {
-        return null;
+        return <Loader isLoading={true}/>;
     }
     return null;
 };

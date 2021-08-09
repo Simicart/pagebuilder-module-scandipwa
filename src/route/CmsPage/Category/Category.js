@@ -1,35 +1,25 @@
-import React, { useState } from 'react';
-import CategoryQuery from '@scandipwa/scandipwa/src/query/Category.query';
-import { useQuery } from 'Route/CmsPage/useQuery';
+import React from 'react';
 import Link from '@scandipwa/scandipwa/src/component/Link/Link.component';
 import './index.scss';
+import Loader from '@scandipwa/scandipwa/src/component/Loader';
+import { useCategory } from 'Route/CmsPage/useCategory';
 
 export function Category(props) {
-    const { item } = props;
-    const idToFind = parseInt(item && item.dataParsed ? item.dataParsed.openCategoryProducts : null);
 
-    const q = idToFind ? CategoryQuery.getQuery({ categoryIds: idToFind }) : null;
     const {
-        data
-    } = useQuery(q);
+        canRender,
+        item,
+        imageStyle,
+        foundCate,
+        loading
+    } = useCategory(props);
 
     if (
-        item &&
-        item.dataParsed &&
-        item.dataParsed.openCategoryProducts
-        &&
-        data &&
-        data.category
+        canRender
     ) {
-        const foundCate = data.category;
 
         if (foundCate) {
             const { dataParsed } = item;
-            const imageStyle = {
-                display: 'block',
-                margin: '10px auto',
-                width: '100%'
-            };
 
             return (
                 <React.Fragment>
@@ -53,6 +43,9 @@ export function Category(props) {
 
             );
         }
+    }
+    if (loading) {
+        return <Loader isLoading={true}/>;
     }
     return '';
 }

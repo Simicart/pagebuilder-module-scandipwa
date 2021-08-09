@@ -17,7 +17,6 @@
     overflow: auto;
 
     .images {
-      min-width: 170px;
       width: 30%;
       flex-shrink: 0;
       margin-inline-end: 10px;
@@ -25,7 +24,7 @@
     }
 
     .ProductCard {
-      min-width: unset;
+      min-width: 25rem;
       margin-left: 2rem;
 
       .Image {
@@ -33,6 +32,10 @@
           height: 100%;
           width: auto;
         }
+      }
+
+      .TextPlaceholder {
+        display: none;
       }
     }
   }

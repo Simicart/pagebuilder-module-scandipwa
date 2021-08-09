@@ -25,9 +25,10 @@ export const useQuery = (query) => {
 
     useEffect(() => {
         let status = { mounted: true };
-        setLoading(true);
-        action(status);
-
+        if (query && !loading) {
+            setLoading(true);
+            action(status);
+        }
         return () => status.mounted = false;
     }, [JSON.stringify(query || '')]);
 
