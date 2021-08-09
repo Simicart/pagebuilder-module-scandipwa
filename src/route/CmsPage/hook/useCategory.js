@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CategoryQuery from '@scandipwa/scandipwa/src/query/Category.query';
-import { useQuery } from 'Route/CmsPage/useQuery';
+import { useQuery } from 'Route/CmsPage/hook/useQuery';
 
 const imageStyle = {
     display: 'block',

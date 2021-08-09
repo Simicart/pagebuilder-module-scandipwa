@@ -1,7 +1,7 @@
-import { useProducts } from 'Route/CmsPage/useProducts';
+import { useProducts } from 'Route/CmsPage/hook/useProducts';
 import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
 import React from 'react';
-import { CarefreeHorizontalScroll } from 'Route/CmsPage/CarefreeHorizontalScroll/CarefreeHorizontalScroll';
+import { CarefreeHorizontalScroll } from 'Route/CmsPage/components/CarefreeHorizontalScroll/CarefreeHorizontalScroll';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 
 export const ProductScroll = (props) => {

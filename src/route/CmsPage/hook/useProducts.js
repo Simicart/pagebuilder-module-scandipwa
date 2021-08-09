@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductListQuery from '@scandipwa/scandipwa/src/query/ProductList.query';
-import { useQuery } from 'Route/CmsPage/useQuery';
+import { useQuery } from 'Route/CmsPage/hook/useQuery';
 
 export const useProducts = (props) => {
     const {

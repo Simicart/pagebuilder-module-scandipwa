@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@scandipwa/scandipwa/src/component/Link/Link.component';
 import './index.scss';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import { useCategory } from 'Route/CmsPage/useCategory';
+import { useCategory } from 'Route/CmsPage/hook/useCategory';
 
 export function Category(props) {
 
