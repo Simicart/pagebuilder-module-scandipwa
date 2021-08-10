@@ -11,7 +11,6 @@ const millisInSecond = 1000;
 // Try use query builder from scandi to utilize hash value -> reduce header size
 const modifiedFetch = (rawQueries, ident, cache_ttl) => {
     const preparedQuery = prepareQuery(rawQueries);
-    console.log('poi', preparedQuery.query.length + JSON.stringify(preparedQuery.variables).length);
     return executeGet(preparedQuery, ident, cache_ttl * millisInSecond);
 };
 
