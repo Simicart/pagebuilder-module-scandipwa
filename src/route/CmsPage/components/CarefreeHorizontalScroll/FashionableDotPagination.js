@@ -1,4 +1,6 @@
 import React from 'react';
+import SimpleGreyDot from './icon/dot.svg';
+import OrbitalDot from './icon/dot-circle.svg';
 import './FashionableDotPagination.css';
 
 export const SimpleDot = (props) => {
@@ -8,7 +10,7 @@ export const SimpleDot = (props) => {
     } = props || {};
     const newClass = ['simple-grey-dot', className].join(' ');
 
-    return <img className={newClass} src={'/icon/dot.svg'} alt={''} {...rest} />;
+    return <img className={newClass} src={SimpleGreyDot} alt={''} {...rest} />;
 };
 
 export const DotWithOrbital = (props) => {
@@ -18,7 +20,7 @@ export const DotWithOrbital = (props) => {
     } = props || {};
     const newClass = ['orbital-dot', className].join(' ');
 
-    return <img className={newClass} src={'/icon/dot-circle.svg'} alt={''} {...rest} />;
+    return <img className={newClass} src={OrbitalDot} alt={''} {...rest} />;
 };
 
 export const HorizontalBar = (props) => {
