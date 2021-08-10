@@ -33,9 +33,11 @@ export const useProducts = (props) => {
         }
         if (dataParsed.openProductsWidthSortAtt) {
             const directionToSort = dataParsed.openProductsWidthSortDir ? dataParsed.openProductsWidthSortDir.toUpperCase() : 'ASC';
-            sortData = {};
             if (dataParsed.openProductsWidthSortAtt) {
-                sortData[dataParsed.openProductsWidthSortAtt] = directionToSort;
+                sortData = {};
+                // this is specific to _getArgumentsMap of ProductList.query.js. Change this for other flatform
+                sortData['sortKey'] = dataParsed.openProductsWidthSortAtt;
+                sortData['sortDirection'] = directionToSort;
             }
         }
         if (dataParsed.openProductsWidthSortPageSize) {

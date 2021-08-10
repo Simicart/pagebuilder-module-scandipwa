@@ -1,7 +1,19 @@
 import { useState, useCallback, useEffect } from 'react';
-import { fetchQuery } from '@scandipwa/scandipwa/src/util/Request';
+import { executeGet, fetchQuery } from '@scandipwa/scandipwa/src/util/Request';
+import Field from '@scandipwa/scandipwa/src/component/Field/Field.component';
+import { prepareQuery } from '@scandipwa/scandipwa/src/util/Query';
 
 const innerMemory = {};
+
+const millisInSecond = 1000;
+
+// Note: get request may fail if payload is too large.
+// Try use query builder from scandi to utilize hash value -> reduce header size
+const modifiedFetch = (rawQueries, ident, cache_ttl) => {
+    const preparedQuery = prepareQuery(rawQueries);
+    console.log('poi', preparedQuery.query.length + JSON.stringify(preparedQuery.variables).length);
+    return executeGet(preparedQuery, ident, cache_ttl * millisInSecond);
+};
 
 export const useQuery = (query, ident = null) => {
     const [data, setData] = useState(null);
@@ -9,7 +21,9 @@ export const useQuery = (query, ident = null) => {
     const [error, setError] = useState(null);
 
     const action = async (status) => {
-        return fetchQuery(query);
+        return modifiedFetch(query, ident);
+        // POST alternative
+        // return fetchQuery(query);
     };
 
     const refetch = async () => {
