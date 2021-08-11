@@ -21,9 +21,7 @@ export const CategoryScroll = (props) => {
         canRender
     } = useCategory(props);
 
-    if (
-        canRender
-    ) {
+    if (canRender) {
         const cateChildren = data.category.children || [];
         const { dataParsed } = item;
 

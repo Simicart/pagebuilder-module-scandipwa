@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CategoryQuery from '@scandipwa/scandipwa/src/query/Category.query';
 import { useQuery } from 'Route/CmsPage/hook/useQuery';
+import { makeSignature } from 'Route/CmsPage/utils/makeSignature';
 
 const imageStyle = {
     display: 'block',
@@ -8,16 +9,18 @@ const imageStyle = {
     width: '100%'
 };
 
+const signatureType = 'category';
+
 export const useCategory = (props) => {
     const { item } = props;
     const idToFind = item && item.dataParsed ? parseInt(item.dataParsed.openCategoryProducts) : null;
 
-    const q = idToFind ? CategoryQuery.getQuery({ categoryIds: idToFind }) : null;
+    const args = { categoryIds: idToFind };
+    const q = idToFind ? CategoryQuery.getQuery(args) : null;
     const {
         data,
-        loading,
-        error
-    } = useQuery(q);
+        loading
+    } = useQuery(q, makeSignature(args, signatureType));
 
     const canRender = item &&
         item.dataParsed &&

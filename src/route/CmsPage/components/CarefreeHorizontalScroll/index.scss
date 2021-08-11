@@ -23,6 +23,7 @@
       scrollbar-width: none;
       /* this will hide the scrollbar in internet explorers */
       -ms-overflow-style: none;
+      align-items: flex-end;
 
       &::-webkit-scrollbar {
         display: none;

@@ -14,10 +14,7 @@ export function Category(props) {
         loading
     } = useCategory(props);
 
-    if (
-        canRender
-    ) {
-
+    if (canRender) {
         if (foundCate) {
             const { dataParsed } = item;
 
@@ -43,8 +40,7 @@ export function Category(props) {
 
             );
         }
-    }
-    if (loading) {
+    } else if (loading) {
         return <Loader isLoading={true}/>;
     }
     return '';
