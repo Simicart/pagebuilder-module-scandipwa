@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
-import { useProducts } from 'Route/CmsPage/hook/useProducts';
+import { useProducts } from 'Component/Pagebuilder/hook/useProducts';
 import './ProductList.scss';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 

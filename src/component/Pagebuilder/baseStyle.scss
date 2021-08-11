@@ -1,0 +1,7 @@
+.Loader {
+  background-color: unset;
+}
+
+.LoaderContainer {
+  min-height: calc(100vh - var(--header-height) - var(--breadcrumbs-height));
+}

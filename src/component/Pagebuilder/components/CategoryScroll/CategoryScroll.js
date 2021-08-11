@@ -1,6 +1,6 @@
 import React from 'react';
 import { CarefreeHorizontalScroll } from '../CarefreeHorizontalScroll/CarefreeHorizontalScroll';
-import { useCategory } from 'Route/CmsPage/hook/useCategory';
+import { useCategory } from 'Component/Pagebuilder/hook/useCategory';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import Link from '@scandipwa/scandipwa/src/component/Link/Link.component';
 import './CategoryScroll.scss';
