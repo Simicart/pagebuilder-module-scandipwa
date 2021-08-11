@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductListQuery from '@scandipwa/scandipwa/src/query/ProductList.query';
-import { useQuery } from 'Route/CmsPage/hook/useQuery';
-import { makeSignature } from 'Route/CmsPage/utils/makeSignature';
+import { useQuery } from 'Component/Pagebuilder/hook/useQuery';
+import { makeSignature } from 'Component/Pagebuilder/utils/makeSignature';
 
 const signatureType = 'products';
 

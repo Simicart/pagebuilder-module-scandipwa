@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
-import { useProducts } from 'Route/CmsPage/hook/useProducts';
-import { CarefreeHorizontalScroll } from 'Route/CmsPage/components/CarefreeHorizontalScroll/CarefreeHorizontalScroll';
+import { useProducts } from 'Component/Pagebuilder/hook/useProducts';
+import { CarefreeHorizontalScroll } from 'Component/Pagebuilder/components/CarefreeHorizontalScroll/CarefreeHorizontalScroll';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import './ProductScroll.scss';
 

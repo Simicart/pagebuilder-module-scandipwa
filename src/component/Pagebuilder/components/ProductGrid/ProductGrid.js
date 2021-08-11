@@ -1,6 +1,6 @@
 import React from 'react';
 // import GalleryItem from '@magento/venia-ui/lib/components/Gallery/item';
-import { useProducts } from 'Route/CmsPage/hook/useProducts';
+import { useProducts } from 'Component/Pagebuilder/hook/useProducts';
 import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
 import './ProductGrid.scss';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
