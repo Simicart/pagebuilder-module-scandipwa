@@ -16,22 +16,22 @@ For the best expirience, install `scandipwa-cli` package globally. To do this, r
 npm i -g scandipwa-cli
 ```
 
-## Available Scripts
+## Available Commands
 
 ### `yarn start`
 
-Starts the development server.
+Starts the development server (http://localhost:3000/).
 
 **Features**:
 
-- The page will reload if you make edits.
-- You will also see any lint errors in the console.
+- The page will automatically reload if you make any code changes.
+- You will also see the build errors and lint warnings in the console.
 
 ### `yarn build`
 
 Bundles the app into static files for production.
 
-> **Note**: To bundle your application as valid Magento 2 theme use `--magento` option.
+> **Note**: To bundle your application as a valid Magento 2 theme use `--magento` option.
 
 **Features**:
 
@@ -40,7 +40,7 @@ Bundles the app into static files for production.
 
 ## Extensions
 
-To install an extension, run following command:
+To install a ScandiPWA extension, run the following command:
 
 ```bash
 scandipwa extension <EXTENSION NAME>
