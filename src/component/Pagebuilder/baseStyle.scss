@@ -5,3 +5,12 @@
 .LoaderContainer {
   min-height: calc(100vh - var(--header-height) - var(--breadcrumbs-height));
 }
+
+// override default padding on li
+.carousel-root .carousel.carousel-slider .control-dots .dot {
+  padding: 0;
+
+  &:before {
+    display: none;
+  }
+}
