@@ -7,10 +7,21 @@
 }
 
 // override default padding on li
-.carousel-root .carousel.carousel-slider .control-dots .dot {
-  padding: 0;
 
-  &:before {
-    display: none;
+.carousel-root {
+  li {
+    &:before {
+      display: none;
+    }
+  }
+
+  .carousel.carousel-slider {
+    .slide.selected {
+      padding-left: 0;
+    }
+
+    .control-dots .dot {
+      padding: 0;
+    }
   }
 }
