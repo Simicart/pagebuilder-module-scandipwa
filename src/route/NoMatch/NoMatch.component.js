@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import OriginalNoMatch from 'Route/NoMatch/OriginalNoMatch/OriginalNoMatch';
-import { endPoint, integrationToken, storeCode } from 'Component/Pagebuilder/Pagebuilder.config';
+import { endPoint, integrationToken } from 'Component/Pagebuilder/Pagebuilder.config';
 import { PagebuilderNoMatchWrapperComponent } from 'Route/NoMatch/PagebuilderWrapper/PagebuilderNoMatchWrapper.component';
 import { useLocation } from 'Component/Pagebuilder/hook/useLocation';
 import { usePbFinder } from 'simi-pagebuilder-react';
@@ -10,7 +10,8 @@ import 'Component/Pagebuilder/baseStyle.scss';
 export function NoMatch(props) {
     const {
         updateBreadcrumbs,
-        cleanUpTransition
+        cleanUpTransition,
+        currentStoreCode = ''
     } = props;
 
     const {
@@ -22,7 +23,7 @@ export function NoMatch(props) {
     } = usePbFinder({
         endPoint,
         integrationToken,
-        storeCode,
+        storeCode: currentStoreCode,
         getPageItems: true
     });
 

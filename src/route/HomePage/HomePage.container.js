@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
-import { endPoint, integrationToken, storeCode } from 'Component/Pagebuilder/Pagebuilder.config';
+import React, { PureComponent, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { endPoint, integrationToken } from 'Component/Pagebuilder/Pagebuilder.config';
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import OriginalHomePage from './OriginalHomePage/OriginalHomePage';
 import { usePbFinder } from 'simi-pagebuilder-react';
 import { useLocation } from 'Component/Pagebuilder/hook/useLocation';
 import { PagebuilderHomePageWrapperComponent } from 'Route/HomePage/PagebuilderWrapper/PagebuilderHomePageWrapper.component';
 import 'Component/Pagebuilder/baseStyle.scss';
+import PropTypes from 'prop-types';
+import { TOP_NAVIGATION_TYPE } from '@scandipwa/scandipwa/src/store/Navigation/Navigation.reducer';
+import { changeNavigationState } from '@scandipwa/scandipwa/src/store/Navigation/Navigation.action';
 
 export function HomePageContainer(props) {
-    const { changeHeaderState } = props;
+    const { changeHeaderState, currentStoreCode } = props;
 
     const {
         loading: pbLoading,
@@ -18,7 +22,7 @@ export function HomePageContainer(props) {
     } = usePbFinder({
         endPoint,
         integrationToken,
-        storeCode,
+        storeCode: currentStoreCode,
         getPageItems: true
     });
 
@@ -43,7 +47,9 @@ export function HomePageContainer(props) {
                 changeHeaderState={changeHeaderState}
                 pageMaskedId={pageMaskedId}
                 pageData={pageData}
-                endPoint={endPoint}/>
+                endPoint={endPoint}
+                currentStoreCode={currentStoreCode}
+            />
         );
     } else if (pageMaskedId === 'notfound') {
         return <OriginalHomePage {...props}/>;
@@ -51,4 +57,27 @@ export function HomePageContainer(props) {
     return null;
 }
 
-export default HomePageContainer;
+/** @namespace Route/HomePage/Container/mapStateToProps */
+export const mapStateToProps = (state) => ({
+    pageIdentifiers: state.ConfigReducer.cms_home_page,
+    currentStoreCode: state.ConfigReducer.code
+});
+
+/** @namespace Route/HomePage/Container/mapDispatchToProps */
+export const mapDispatchToProps = (dispatch) => ({
+    changeHeaderState: (state) => dispatch(changeNavigationState(TOP_NAVIGATION_TYPE, state))
+});
+
+export class HomePageContainerWrapper extends PureComponent {
+    static propTypes = {
+        changeHeaderState: PropTypes.func.isRequired
+    };
+
+    render() {
+        return (
+            <HomePageContainer {...this.props}/>
+        );
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainerWrapper);

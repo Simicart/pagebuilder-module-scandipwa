@@ -12,17 +12,18 @@ export const PagebuilderHomePageWrapperComponent = (props) => {
     const {
         pageMaskedId,
         endPoint,
-        pageData
+        pageData,
+        changeHeaderState
     } = props;
 
     const publishedData = pageData && pageData.publish_items ? pageData : false;
 
-    // useEffect(() => {
-    //     changeHeaderState({
-    //         name: DEFAULT_STATE_NAME,
-    //         isHiddenOnMobile: false
-    //     });
-    // }, []);
+    useEffect(() => {
+        changeHeaderState({
+            name: DEFAULT_STATE_NAME,
+            isHiddenOnMobile: false
+        });
+    }, []);
 
     return (
         <div block="HomePage">
