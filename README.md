@@ -4,9 +4,27 @@ This package contains new ScandiPWA theme sources. Your parent theme is `@scandi
 
 ## Installation
 
-Before you start, make sure to install package dependencies.
+In a new folder, run:
 
-To do this, use `yarn` command.
+```
+git clone https://github.com/Simicart/pagebuilder-module-scandipwa
+cd pagebuilder-module-scandipwa
+yarn install && yarn run start
+```
+
+Change your Pagebuilder credentials at `src/component/Pagebuilder/Pagebuilder.config.js`
+
+```js
+export const endPoint = 'https://tapita.io/pb/graphql/';
+export const integrationToken = 'INTEGRATION_TOKEN';
+export const storeCode = ''
+```
+
+and change Magento URL at `package.json`
+
+```json
+"proxy": "MAGENTO_URL"
+```
 
 ### Recommended packages
 
@@ -51,4 +69,3 @@ scandipwa extension <EXTENSION NAME>
 ### Note
 
 * Files need to strictly follow eslint to be able to compile (a.k.a Please use eslint)
-* Change `proxy` field in `package.json` to your backend.
