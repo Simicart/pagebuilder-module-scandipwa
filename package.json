@@ -3,15 +3,10 @@
     "version": "0.0.1",
     "license": "OSL-3.0",
     "dependencies": {
-        "@apollo/client": "^3.4.5",
         "@scandipwa/eslint-config": "0.1.30",
         "@scandipwa/scandipwa": "4.5.1",
         "@scandipwa/scandipwa-scripts": "2.4.14",
         "@tilework/mosaic": "0.1.4",
-        "graphql": "^15.5.1",
-        "graphql-tag": "^2.12.5",
-        "react-intl": "^5.20.6",
-        "simi-pagebuilder-react": "^1.2.8",
         "scandi-smpagebuilder": "file:packages/scandi-smpagebuilder"
     },
     "scandipwa": {
@@ -43,10 +38,7 @@
         ]
     },
     "eslintConfig": {
-        "extends": "@scandipwa",
-        "ignorePatterns": [
-            "src/**"
-        ]
+        "extends": "@scandipwa"
     },
     "proxy": "https://scandipwa.pwa-commerce.com/"
 }
