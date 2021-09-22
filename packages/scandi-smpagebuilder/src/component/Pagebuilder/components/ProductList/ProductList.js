@@ -23,21 +23,25 @@ export const ProductList = (props) => {
                 </div>
                 <div className="overall-scroll">
                     { data.products.items.map((productItem, indx) => (
-<ProductCard
-  key={ indx.toString() }
-  product={ productItem }
-  availableVisualOptions={ ['label'] }
-  device={ {} }
-  getAttribute={ () => '' }
-  isBundleProductOutOfStock={ () => false }
-  isConfigurableProductOutOfStock={ () => false }
-  isPreview
-  isWishlistEnabled={ false }
-  productOrVariant={ productItem }
-  thumbnail={ productItem.image.url }
-  linkTo={ productItem.url }
-  registerSharedElement={ () => '' }
-/>
+                    <ProductCard
+                      key={ indx.toString() }
+                      product={ { ...productItem, options: productItem?.options || [], configurable_options: productItem?.configurable_options || {} } }
+                      availableVisualOptions={ ['label'] }
+                      device={ {} }
+                      getAttribute={ () => null }
+                      isBundleProductOutOfStock={ () => false }
+                      isConfigurableProductOutOfStock={ () => false }
+                      isPreview
+                      isWishlistEnabled={ false }
+                      productOrVariant={ productItem }
+                      thumbnail={ productItem.image.url }
+                      linkTo={ productItem.url }
+                      registerSharedElement={ () => '' }
+                      inStock
+                      parameters={ {} }
+                      showSelectOptionsNotification={ () => false }
+                      updateConfigurableVariant={ () => null }
+                    />
                     )) }
 
                 </div>

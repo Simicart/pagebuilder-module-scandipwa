@@ -20,7 +20,7 @@ export const ProductScroll = (props) => {
         const products = data.products.items.map((productItem, indx) => (
 <ProductCard
   key={ indx.toString() }
-  product={ productItem }
+  product={ { ...productItem, options: productItem?.options || [] } }
   availableVisualOptions={ ['label'] }
   device={ {} }
   getAttribute={ () => '' }

@@ -31,7 +31,7 @@ export const ProductGrid = (props) => {
     const content = canRender ? data.products.items.map((productItem, indx) => (
 <ProductCard
   key={ indx.toString() }
-  product={ productItem }
+  product={ { ...productItem, options: productItem?.options || [] } }
   availableVisualOptions={ ['label'] }
   device={ {} }
   getAttribute={ () => '' }
