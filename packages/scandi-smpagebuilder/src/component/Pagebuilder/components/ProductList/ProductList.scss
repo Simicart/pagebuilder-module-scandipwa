@@ -1,0 +1,44 @@
+.root.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  .list-title {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    justify-content: space-between;
+  }
+
+  .overall-scroll {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: auto;
+    overflow-y: hidden;
+    height: 100%;
+
+    .images {
+      width: 30%;
+      flex-shrink: 0;
+      margin-inline-end: 10px;
+      margin-bottom: 35px;
+    }
+
+    .ProductCard {
+      min-width: 20rem;
+      margin-right: 1rem;
+
+      .Image {
+        img {
+          height: 100%;
+          width: auto;
+        }
+      }
+
+      .TextPlaceholder {
+        display: none;
+      }
+    }
+  }
+}

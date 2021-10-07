@@ -10,7 +10,7 @@ To do this, use `yarn` command.
 
 ### Recommended packages
 
-For the best expirience, install `scandipwa-cli` package globally. To do this, run:
+For the best experience, install `scandipwa-cli` package globally. To do this, run:
 
 ```bash
 npm i -g scandipwa-cli
@@ -50,5 +50,9 @@ scandipwa extension <EXTENSION NAME>
 
 ### Note
 
-* Files need to strictly follow eslint to be able to compile (a.k.a Please use eslint)
+* Files need to ~~strictly follow eslint~~ to be able to compile (currently disable strict eslint, but you should still
+  follow style rules)
 * Change `proxy` field in `package.json` to your backend.
+* All the code for this extension resides in __packages/scandi-smpagebuilder__, which will be used to install.
+  Therefore, only add code to __packages/scandi-smpagebuilder__ folder.
+* Extension works by [overriding components](https://docs.create-scandipwa-app.com/extensions/application-plugins).
