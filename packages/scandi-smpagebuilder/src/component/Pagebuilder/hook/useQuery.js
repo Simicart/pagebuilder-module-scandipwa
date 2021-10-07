@@ -1,5 +1,5 @@
 import { prepareQuery } from '@scandipwa/scandipwa/src/util/Query';
-import { executeGet } from '@scandipwa/scandipwa/src/util/Request';
+import { executeGet, fetchQuery } from '@scandipwa/scandipwa/src/util/Request';
 import { useEffect, useState } from 'react';
 
 export const innerMemory = {};
@@ -20,10 +20,9 @@ export const useQuery = (query, ident = null) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const action = async (status) => modifiedFetch(query, ident)
+    const action = async (status) => modifiedFetch(query, ident);
     // POST alternative
     // return fetchQuery(query);
-    ;
 
     const refetch = async () => {
         const status = { mounted: true };

@@ -1,5 +1,5 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { usePbFinder } from 'simi-pagebuilder-react';
 
 import { useLocation } from '../../Pagebuilder/hook/useLocation';
@@ -15,7 +15,8 @@ export function NoMatch(props) {
         },
         cleanUpTransition = () => {
         },
-        currentStoreCode = ''
+        currentStoreCode = '',
+        changeHeaderState
     } = props || {};
 
     const {
@@ -47,8 +48,12 @@ export function NoMatch(props) {
         );
     }
 
-    if (pageMaskedId
-        && pageMaskedId !== 'notfound') {
+    if (pageMaskedId && pageMaskedId !== 'notfound') {
+        changeHeaderState({
+            name: 'found',
+            isHiddenOnMobile: false
+        });
+
         return (
             <PagebuilderNoMatchWrapperComponent
               pageMaskedId={ pageMaskedId }

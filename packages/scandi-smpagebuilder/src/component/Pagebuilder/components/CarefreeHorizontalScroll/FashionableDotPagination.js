@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import OrbitalDot from './icon/dot-circle.svg';
 import SimpleGreyDot from './icon/dot.svg';
@@ -49,30 +49,33 @@ export const FashionableDotPagination = (props) => {
 
     const content = Array.from(Array(numberOfPages)
         .keys(), (x) => {
-        const onChangeIndex = () => _onChangeIndex(x);
+        const onChangeIndex = () => {
+            // console.log(x)
+            _onChangeIndex(x);
+        };
         if (currentIndex === x) {
             if (currentIndex === 0) {
                 return (
-                    <>
+                    <Fragment key={ `${x}-${currentIndex }-${ numberOfPages}` }>
                         <DotWithOrbital key={ currentIndex.toString() } />
                         <HorizontalBar key="bar-1" />
-                    </>
+                    </Fragment>
                 );
             } if (currentIndex === numberOfPages - 1) {
                 return (
-                    <>
+                    <Fragment key={ `${x}-${currentIndex }-${ numberOfPages}` }>
                         <HorizontalBar key="bar-1" />
                         <DotWithOrbital key={ currentIndex.toString() } />
-                    </>
+                    </Fragment>
                 );
             }
 
             return (
-                <>
+                <Fragment key={ `${x}-${currentIndex }-${ numberOfPages}` }>
                         <HorizontalBar key="bar-1" />
                         <DotWithOrbital key={ currentIndex.toString() } />
                         <HorizontalBar key="bar-2" />
-                </>
+                </Fragment>
             );
         }
 
@@ -84,10 +87,10 @@ export const FashionableDotPagination = (props) => {
                 />
         );
     });
-
-    if (numberOfPages === 0) {
-        return '';
-    }
+    //
+    // if (numberOfPages === 0) {
+    //     return null;
+    // }
 
     const newClass = 'fashionable-pagination-container';
 

@@ -4,13 +4,14 @@ import { makeSignature } from '../utils/makeSignature';
 import { useQuery } from './useQuery';
 
 export const signatureType = 'products';
+export const niceDisplayNumber = 12;
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Hook/UseProducts/useProducts */
 export const useProducts = (props) => {
     const {
         item,
         formatMessage,
-        defaultPageSize = 12,
+        defaultPageSize = niceDisplayNumber,
         beginCategory = null
     } = props;
 
@@ -33,23 +34,26 @@ export const useProducts = (props) => {
             filterData = { category_id: { eq: String(dataParsed.openCategoryProducts) } };
         }
         if (dataParsed.openProductsWidthSortAtt) {
-            const directionToSort = dataParsed.openProductsWidthSortDir ? dataParsed.openProductsWidthSortDir.toUpperCase() : 'ASC';
+            const directionToSort = dataParsed.openProductsWidthSortDir
+                ? dataParsed.openProductsWidthSortDir.toUpperCase()
+                : 'ASC';
+
             if (dataParsed.openProductsWidthSortAtt) {
                 sortData = {};
                 // this is specific to _getArgumentsMap of ProductList.query.js. Change this for other flatform
-                sortData.sortKey = dataParsed.openProductsWidthSortAtt;
+                sortData.sortKey = dataParsed.openProductsWidthSortAtt.toLowerCase();
                 sortData.sortDirection = directionToSort;
             }
         }
         if (dataParsed.openProductsWidthSortPageSize) {
-            pageSize = parseInt(dataParsed.openProductsWidthSortPageSize);
+            pageSize = parseInt(dataParsed.openProductsWidthSortPageSize, 10);
         }
     }
 
     const args = {
         args: {
             filter: {
-                categoryIds: parseInt(filterData.category_id.eq)
+                categoryIds: parseInt(filterData.category_id.eq, 10)
             },
             pageSize,
             sort: sortData || null

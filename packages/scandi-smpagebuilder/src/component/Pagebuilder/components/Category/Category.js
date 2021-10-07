@@ -43,5 +43,5 @@ export function Category(props) {
         return <Loader isLoading />;
     }
 
-    return '';
+    return null;
 }

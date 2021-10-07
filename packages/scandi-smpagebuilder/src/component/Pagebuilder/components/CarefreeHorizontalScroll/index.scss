@@ -17,7 +17,8 @@
       width: 100%;
       flex-wrap: nowrap;
       //overflow: auto;
-      overflow-y: visible;
+      //overflow-y: visible;
+      overflow: auto;
       scroll-behavior: smooth;
       /* this will hide the scrollbar in mozilla based browsers */
       overflow: -moz-scrollbars-none;

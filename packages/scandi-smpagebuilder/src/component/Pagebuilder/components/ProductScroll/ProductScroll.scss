@@ -1,5 +1,37 @@
+$tablet-width: 768px;
+
+@mixin desktop {
+  @media (min-width: #{$tablet-width + 1px}) {
+    @content;
+  }
+}
+
+
 .product-scroll {
   .TextPlaceholder {
     display: none;
   }
+
+  @include desktop {
+    .child-container {
+      padding-bottom: 0;
+
+      &:hover {
+        padding-bottom: 2rem;
+      }
+    }
+
+    .ProductCard {
+      padding-top: 5rem;
+
+      &:hover {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
 }

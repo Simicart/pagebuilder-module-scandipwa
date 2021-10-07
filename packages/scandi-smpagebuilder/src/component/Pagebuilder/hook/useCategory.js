@@ -14,9 +14,10 @@ export const signatureType = 'category';
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Hook/UseCategory/useCategory */
 export const useCategory = (props) => {
     const { item } = props;
-    const idToFind = item && item.dataParsed ? parseInt(item.dataParsed.openCategoryProducts) : null;
+    const idToFind = item && item.dataParsed ? parseInt(item.dataParsed.openCategoryProducts, 10) : null;
 
     const args = { categoryIds: idToFind };
+
     const q = idToFind ? CategoryQuery.getQuery(args) : null;
     const {
         data,
