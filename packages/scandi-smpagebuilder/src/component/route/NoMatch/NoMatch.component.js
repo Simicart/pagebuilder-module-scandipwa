@@ -40,6 +40,13 @@ export function NoMatch(props) {
         }
     }, [currentPath, pageMaskedId, findPage]);
 
+    useEffect(() => {
+        changeHeaderState({
+            name: 'found',
+            isHiddenOnMobile: false
+        });
+    }, []);
+
     if (pbLoading) {
         return (
             <div block="LoaderContainer">
