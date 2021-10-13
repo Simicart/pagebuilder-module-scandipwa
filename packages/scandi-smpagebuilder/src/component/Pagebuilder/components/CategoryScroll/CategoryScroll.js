@@ -5,7 +5,7 @@ import React from 'react';
 import { useCategory } from '../../hook/useCategory';
 import { CarefreeHorizontalScroll } from '../CarefreeHorizontalScroll/CarefreeHorizontalScroll';
 
-import './CategoryScroll.scss';
+import '../abd.scss';
 
 export const imageStyle = {
     display: 'block',

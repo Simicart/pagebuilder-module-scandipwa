@@ -1,11 +1,11 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
+const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 import React from 'react';
 
 import { useProducts } from '../../hook/useProducts';
 import { CarefreeHorizontalScroll } from '../CarefreeHorizontalScroll/CarefreeHorizontalScroll';
 
-import './ProductScroll.scss';
+import '../abg.scss';
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductScroll/ProductScroll */
 export const ProductScroll = (props) => {

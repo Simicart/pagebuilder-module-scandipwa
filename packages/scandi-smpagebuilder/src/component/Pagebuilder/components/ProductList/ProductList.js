@@ -1,5 +1,5 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
+const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -7,7 +7,7 @@ import { HomePageContainer } from '../../../route/HomePage/HomePage.container';
 import { useProducts } from '../../hook/useProducts';
 import { Placeholder } from '../../utils/Placeholder';
 
-import './ProductList.scss';
+import '../abf.scss';
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductList/ProductList */
 export const ProductList = (props) => {

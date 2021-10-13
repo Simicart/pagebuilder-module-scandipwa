@@ -1,10 +1,12 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
 import React from 'react';
+
+const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 
 import { useProducts } from '../../hook/useProducts';
 
-import './ProductGrid.scss';
+import '../abe.scss';
+
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductGrid/mapGalleryItem */
 export const mapGalleryItem = (item) => {
