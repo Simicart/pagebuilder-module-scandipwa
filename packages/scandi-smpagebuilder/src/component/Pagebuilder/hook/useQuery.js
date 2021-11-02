@@ -26,7 +26,6 @@ export const useQuery = (query, ident = null) => {
 
     const refetch = async () => {
         const status = { mounted: true };
-        console.log('hello')
         return action(status)
             .then(
                 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Hook/UseQuery/action/then */

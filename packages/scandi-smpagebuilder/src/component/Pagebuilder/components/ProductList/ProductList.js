@@ -1,5 +1,4 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -8,6 +7,8 @@ import { useProducts } from '../../hook/useProducts';
 import { Placeholder } from '../../utils/Placeholder';
 
 import '../abf.scss';
+
+export const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductList/ProductList */
 export const ProductList = (props) => {
@@ -21,8 +22,6 @@ export const ProductList = (props) => {
         canRender,
         wholeName
     } = useProducts(props);
-
-    console.log('dv', device);
 
     if (canRender) {
         return (
