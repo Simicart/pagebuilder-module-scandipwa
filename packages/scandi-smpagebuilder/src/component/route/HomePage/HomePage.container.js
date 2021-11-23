@@ -32,10 +32,6 @@ export function HomePageContainerCore(props) {
         getPageItems: true
     });
 
-    useEffect(() => {
-        console.log('ref', pageData);
-    }, [pageData]);
-
     const currentPath = useLocation();
 
     useEffect(() => {
