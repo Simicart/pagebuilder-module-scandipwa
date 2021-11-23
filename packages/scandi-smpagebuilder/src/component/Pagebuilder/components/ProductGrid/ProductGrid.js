@@ -51,14 +51,16 @@ export const ProductGrid = (props) => {
     }
 
     return (
-        <div className="product-grid">
-            <div className="name-container">
-                <h3 className="name-text">{ wholeName }</h3>
-            </div>
-            <div className="start-grid">
+        // <div className="product-grid">
+        //     <div className="name-container">
+        //         <h3 className="name-text">{ wholeName }</h3>
+        //     </div>
+        //     <div className="start-grid">
+        <>
                 { content }
-            </div>
-        </div>
+        </>
+    // </div>
+        // </div>
     );
 };
 

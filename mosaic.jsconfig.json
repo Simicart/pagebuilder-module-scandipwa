@@ -54,6 +54,13 @@
             "Type/*": [
                 "node_modules/@scandipwa/scandipwa/src/type/*",
                 "src/type/*"
+            ],
+            "SourcePages/*": [
+                "node_modules/@scandipwa/scandipwa/src/pages/*"
+            ],
+            "Pages/*": [
+                "node_modules/@scandipwa/scandipwa/src/pages/*",
+                "src/pages/*"
             ]
         }
     }
