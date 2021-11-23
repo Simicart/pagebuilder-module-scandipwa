@@ -1,12 +1,11 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import React from 'react';
 
-const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
-
 import { useProducts } from '../../hook/useProducts';
 
 import '../abe.scss';
 
+export const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductGrid/mapGalleryItem */
 export const mapGalleryItem = (item) => {
@@ -66,14 +65,16 @@ export const ProductGrid = (props) => {
     }
 
     return (
-        <div className="product-grid">
-            <div className="name-container">
-                <h3 className="name-text">{ wholeName }</h3>
-            </div>
-            <div className="start-grid">
+        // <div className="product-grid">
+        //     <div className="name-container">
+        //         <h3 className="name-text">{ wholeName }</h3>
+        //     </div>
+        //     <div className="start-grid">
+        <>
                 { content }
-            </div>
-        </div>
+        </>
+    // </div>
+        // </div>
     );
 };
 

@@ -32,6 +32,10 @@ export function HomePageContainerCore(props) {
         getPageItems: true
     });
 
+    useEffect(() => {
+        console.log('ref', pageData);
+    }, [pageData]);
+
     const currentPath = useLocation();
 
     useEffect(() => {
@@ -40,7 +44,6 @@ export function HomePageContainerCore(props) {
         }
     }, [currentPath, pageMaskedId, findPage]);
 
-
     if (pbLoading) {
         return (
             <div block="LoaderContainer">
@@ -48,6 +51,7 @@ export function HomePageContainerCore(props) {
             </div>
         );
     }
+
     if (pageMaskedId
         && pageMaskedId !== 'notfound') {
         return (
