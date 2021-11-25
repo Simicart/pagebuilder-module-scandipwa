@@ -25,3 +25,34 @@
     }
   }
 }
+
+
+.smpb-container {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #23282c;
+  text-align: left;
+  //font-family: Poppins; // using scandi font. might be a little different
+
+  .spb-item {
+    &.spb-item-root {
+      align-items: center;
+      padding: 0;
+    }
+
+    .type_paragraph {
+      & > p { // handle paragraph component. Will add custom class later
+        margin-top: 0;
+        margin-bottom: 1rem;
+        line-height: unset;
+        font-size: unset;
+      }
+    }
+    .type_text{
+
+    }
+  }
+
+
+}
