@@ -1,11 +1,8 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
+
 const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 import React from 'react';
-import { connect } from 'react-redux';
-
-import { HomePageContainer } from '../../../route/HomePage/HomePage.container';
 import { useProducts } from '../../hook/useProducts';
-import { Placeholder } from '../../utils/Placeholder';
 
 import '../abf.scss';
 
@@ -22,17 +19,15 @@ export const ProductList = (props) => {
         wholeName
     } = useProducts(props);
 
-    console.log('dv', device);
-
     if (canRender) {
         return (
             <div className="root product-list">
                 <div className="list-title">
-                    <h3>{ wholeName }</h3>
+                    <h3>{wholeName}</h3>
                 </div>
 
                 <div className="overall-scroll">
-                    { data.products.items.map((productItem, indx) => {
+                    {data.products.items.map((productItem, indx) => {
                         const pOp = (productItem?.configurable_options || []).map((x) => ({
                             ...x,
                             attribute_code: x.attribute_code,
@@ -41,37 +36,36 @@ export const ProductList = (props) => {
 
                         return (
                             <ProductCard
-                              key={ indx.toString() }
-                              product={ {
-                                  ...productItem,
-                                  options: productItem?.options || [],
-                                  configurable_options: pOp,
-                                  variants: (productItem.variants || []).map((x) => x.product)
-                              } }
-                              device={ device || {} }
-                              getAttribute={ () => null }
-                              isBundleProductOutOfStock={ () => false }
-                              isConfigurableProductOutOfStock={ () => false }
-                              isPreview
-                              isWishlistEnabled={ false }
-                              productOrVariant={ productItem }
-                              thumbnail={ productItem.image.url }
-                              linkTo={ productItem.url }
-                              registerSharedElement={ () => '' }
-                              inStock
-                              parameters={ {} }
-                              showSelectOptionsNotification={ () => false }
-                              updateConfigurableVariant={ () => null }
+                                key={indx.toString()}
+                                product={{
+                                    ...productItem,
+                                    options: productItem?.options || [],
+                                    configurable_options: pOp,
+                                    variants: (productItem.variants || []).map((x) => x.product)
+                                }}
+                                device={device || {}}
+                                getAttribute={() => null}
+                                isBundleProductOutOfStock={() => false}
+                                isConfigurableProductOutOfStock={() => false}
+                                isPreview
+                                isWishlistEnabled={false}
+                                productOrVariant={productItem}
+                                thumbnail={productItem.image.url}
+                                linkTo={productItem.url}
+                                registerSharedElement={() => ''}
+                                inStock
+                                parameters={{}}
+                                showSelectOptionsNotification={() => false}
+                                updateConfigurableVariant={() => null}
                             />
                         );
-                    }) }
-
+                    })}
                 </div>
             </div>
         );
     }
     if (loading) {
-        return <Loader isLoading />;
+        return <Loader isLoading/>;
     }
 
     return null;
