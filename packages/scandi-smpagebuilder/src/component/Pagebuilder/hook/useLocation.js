@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { extractBaseUrlForTapitaQuery } from '../utils/extractBaseUrlForTapitaQuery';
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Hook/UseLocation/useLocation */
 export const useLocation = (props) => {
@@ -6,7 +7,7 @@ export const useLocation = (props) => {
 
     useEffect(() => {
         if (pathname !== location.pathname) {
-            setPathname(location.pathname);
+            setPathname(extractBaseUrlForTapitaQuery(location.pathname));
         }
     }, [location.pathname]);
 
