@@ -53,10 +53,12 @@ export const useProducts = (props) => {
     const args = {
         args: {
             filter: {
-                categoryIds: parseInt(filterData.category_id.eq, 10)
+                categoryIds: parseInt(filterData.category_id.eq, 10) || 2
             },
             pageSize,
-            sort: sortData || null
+            sort: sortData || {
+                sortKey: 'name'
+            }
         }
     };
 

@@ -40,5 +40,5 @@
     "eslintConfig": {
         "extends": "@scandipwa"
     },
-    "proxy": "https://scandipb.pwa-commerce.com/"
+    "proxy": "http://dev.elmanar.com.eg/"
 }
