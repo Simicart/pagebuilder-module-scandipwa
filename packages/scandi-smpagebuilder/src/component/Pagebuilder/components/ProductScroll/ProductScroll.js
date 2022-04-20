@@ -18,30 +18,34 @@ export const ProductScroll = (props) => {
 
     if (canRender) {
         const products = data.products.items.map((productItem, indx) => (
-<ProductCard
-  key={ indx.toString() }
-  product={ productItem }
-  availableVisualOptions={ ['label'] }
-  device={ {} }
-  getAttribute={ () => '' }
-  isBundleProductOutOfStock={ () => false }
-  isConfigurableProductOutOfStock={ () => false }
-  isPreview
-  isWishlistEnabled={ false }
-  productOrVariant={ productItem }
-  thumbnail={ productItem.image.url }
-  linkTo={ productItem.url }
-  registerSharedElement={ () => '' }
-/>
+            <ProductCard
+                key={indx.toString()}
+                product={{
+                    ...productItem,
+                    options: productItem.options || []
+                }}
+                availableVisualOptions={['label']}
+                device={{}}
+                getAttribute={() => ''}
+                isBundleProductOutOfStock={() => false}
+                isConfigurableProductOutOfStock={() => false}
+                isPreview
+                isWishlistEnabled={false}
+                productOrVariant={productItem}
+                thumbnail={productItem.image.url}
+                linkTo={productItem.url}
+                registerSharedElement={() => ''}
+            />
         ));
 
         return (
-            <CarefreeHorizontalScroll item={ item } _class="product-scroll">
-                { products }
+            <CarefreeHorizontalScroll item={item} _class="product-scroll">
+                {products}
             </CarefreeHorizontalScroll>
         );
-    } if (loading) {
-        return <Loader isLoading />;
+    }
+    if (loading) {
+        return <Loader isLoading/>;
     }
 
     return '';

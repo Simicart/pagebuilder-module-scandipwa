@@ -19,32 +19,36 @@ export const ProductList = (props) => {
         return (
             <div className="root product-list">
                 <div className="list-title">
-                    { wholeName }
+                    {wholeName}
                 </div>
                 <div className="overall-scroll">
-                    { data.products.items.map((productItem, indx) => (
-<ProductCard
-  key={ indx.toString() }
-  product={ productItem }
-  availableVisualOptions={ ['label'] }
-  device={ {} }
-  getAttribute={ () => '' }
-  isBundleProductOutOfStock={ () => false }
-  isConfigurableProductOutOfStock={ () => false }
-  isPreview
-  isWishlistEnabled={ false }
-  productOrVariant={ productItem }
-  thumbnail={ productItem.image.url }
-  linkTo={ productItem.url }
-  registerSharedElement={ () => '' }
-/>
-                    )) }
+                    {data.products.items.map((productItem, indx) => (
+                        <ProductCard
+                            key={indx.toString()}
+                            product={{
+                                ...productItem,
+                                options: productItem.options || []
+                            }}
+                            availableVisualOptions={['label']}
+                            device={{}}
+                            getAttribute={() => ''}
+                            isBundleProductOutOfStock={() => false}
+                            isConfigurableProductOutOfStock={() => false}
+                            isPreview
+                            isWishlistEnabled={false}
+                            productOrVariant={productItem}
+                            thumbnail={productItem.image.url}
+                            linkTo={productItem.url}
+                            registerSharedElement={() => ''}
+                        />
+                    ))}
 
                 </div>
             </div>
         );
-    } if (loading) {
-        return <Loader isLoading />;
+    }
+    if (loading) {
+        return <Loader isLoading/>;
     }
 
     return null;

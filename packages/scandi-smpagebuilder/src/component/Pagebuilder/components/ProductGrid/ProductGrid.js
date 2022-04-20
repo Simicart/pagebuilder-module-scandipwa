@@ -29,25 +29,28 @@ export const ProductGrid = (props) => {
     });
 
     const content = canRender ? data.products.items.map((productItem, indx) => (
-<ProductCard
-  key={ indx.toString() }
-  product={ productItem }
-  availableVisualOptions={ ['label'] }
-  device={ {} }
-  getAttribute={ () => '' }
-  isBundleProductOutOfStock={ () => false }
-  isConfigurableProductOutOfStock={ () => false }
-  isPreview
-  isWishlistEnabled={ false }
-  productOrVariant={ productItem }
-  thumbnail={ productItem.image.url }
-  linkTo={ productItem.url }
-  registerSharedElement={ () => '' }
-/>
+        <ProductCard
+            key={indx.toString()}
+            product={{
+                ...productItem,
+                options: productItem.options || []
+            }}
+            availableVisualOptions={['label']}
+            device={{}}
+            getAttribute={() => ''}
+            isBundleProductOutOfStock={() => false}
+            isConfigurableProductOutOfStock={() => false}
+            isPreview
+            isWishlistEnabled={false}
+            productOrVariant={productItem}
+            thumbnail={productItem.image.url}
+            linkTo={productItem.url}
+            registerSharedElement={() => ''}
+        />
     )) : null;
 
     if (loading) {
-        return <Loader isLoading />;
+        return <Loader isLoading/>;
     }
 
     return (
@@ -57,9 +60,9 @@ export const ProductGrid = (props) => {
         //     </div>
         //     <div className="start-grid">
         <>
-                { content }
+            {content}
         </>
-    // </div>
+        // </div>
         // </div>
     );
 };

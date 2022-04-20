@@ -10,6 +10,8 @@ import { PagebuilderNoMatchWrapperComponent } from './PagebuilderWrapper/Pagebui
 import '../../Pagebuilder/baseStyle.scss';
 
 export function NoMatch(props) {
+    console.log('sds')
+
     const {
         updateBreadcrumbs = () => {
         },
