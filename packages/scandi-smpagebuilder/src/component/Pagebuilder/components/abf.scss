@@ -2,12 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  padding-bottom: 25px;
+
 
   .list-title {
     display: flex;
     width: 100%;
     margin-bottom: 15px;
     justify-content: space-between;
+    font-size: 2rem;
   }
 
   .overall-scroll {
@@ -17,6 +20,7 @@
     overflow: auto;
     overflow-y: hidden;
     height: 100%;
+
 
     .images {
       width: 30%;
@@ -28,6 +32,10 @@
     .ProductCard {
       min-width: 20rem;
       margin-right: 1rem;
+
+      &:hover {
+        padding-bottom: 64px;
+      }
 
       .Image {
         img {

@@ -1,11 +1,11 @@
 {
-    "name": "scandi-smpagebuilder-example",
+    "name": "scandi-integrate",
     "version": "0.0.1",
     "license": "OSL-3.0",
     "dependencies": {
-        "@scandipwa/eslint-config": "0.1.30",
-        "@scandipwa/scandipwa": "4.5.1",
-        "@scandipwa/scandipwa-scripts": "2.4.14",
+        "@scandipwa/scandipwa": "5.0.5",
+        "@scandipwa/scandipwa-scripts": "2.4.17",
+        "@scandipwa/eslint-config": "0.1.32",
         "@tilework/mosaic": "0.1.4",
         "scandi-smpagebuilder": "file:packages/scandi-smpagebuilder"
     },
@@ -40,5 +40,5 @@
     "eslintConfig": {
         "extends": "@scandipwa"
     },
-    "proxy": "https://scandipwa.pwa-commerce.com/"
+    "proxy": "https://scandipb.pwa-commerce.com/"
 }

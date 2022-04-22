@@ -16,6 +16,8 @@
       display: flex;
       width: 100%;
       flex-wrap: nowrap;
+      //overflow: auto;
+      //overflow-y: visible;
       overflow: auto;
       scroll-behavior: smooth;
       /* this will hide the scrollbar in mozilla based browsers */
@@ -24,6 +26,12 @@
       /* this will hide the scrollbar in internet explorers */
       -ms-overflow-style: none;
       align-items: flex-end;
+
+      & > * {
+        &:hover {
+          padding-bottom: 50px;
+        }
+      }
 
       &::-webkit-scrollbar {
         display: none;

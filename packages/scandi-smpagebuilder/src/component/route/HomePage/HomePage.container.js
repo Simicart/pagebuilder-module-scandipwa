@@ -16,7 +16,8 @@ import '../../Pagebuilder/baseStyle.scss';
 export function HomePageContainerCore(props) {
     const {
         changeHeaderState,
-        currentStoreCode
+        currentStoreCode,
+        device
     } = props || {};
 
     const {
@@ -46,6 +47,7 @@ export function HomePageContainerCore(props) {
             </div>
         );
     }
+
     if (pageMaskedId
         && pageMaskedId !== 'notfound') {
         return (
@@ -55,6 +57,7 @@ export function HomePageContainerCore(props) {
               pageData={ pageData }
               endPoint={ endPoint }
               currentStoreCode={ currentStoreCode }
+              device={ device }
             />
         );
     } if (pageMaskedId === 'notfound') {
@@ -67,7 +70,8 @@ export function HomePageContainerCore(props) {
 /** @namespace ScandiSmpagebuilder/Component/Route/HomePage/Container/mapStateToProps */
 export const mapStateToProps = (state) => ({
     pageIdentifiers: state.ConfigReducer.cms_home_page,
-    currentStoreCode: state.ConfigReducer.code
+    currentStoreCode: state.ConfigReducer.code,
+    device: state.ConfigReducer.device
 });
 
 /** @namespace ScandiSmpagebuilder/Component/Route/HomePage/Container/mapDispatchToProps */

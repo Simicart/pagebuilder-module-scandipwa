@@ -1,10 +1,11 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import ProductCard from '@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component';
 import React from 'react';
 
 import { useProducts } from '../../hook/useProducts';
 
-import './ProductGrid.scss';
+import '../abe.scss';
+
+export const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 
 /** @namespace ScandiSmpagebuilder/Component/Pagebuilder/Components/ProductGrid/mapGalleryItem */
 export const mapGalleryItem = (item) => {
@@ -28,23 +29,36 @@ export const ProductGrid = (props) => {
         defaultPageSize: 8
     });
 
-    const content = canRender ? data.products.items.map((productItem, indx) => (
-<ProductCard
-  key={ indx.toString() }
-  product={ productItem }
-  availableVisualOptions={ ['label'] }
-  device={ {} }
-  getAttribute={ () => '' }
-  isBundleProductOutOfStock={ () => false }
-  isConfigurableProductOutOfStock={ () => false }
-  isPreview
-  isWishlistEnabled={ false }
-  productOrVariant={ productItem }
-  thumbnail={ productItem.image.url }
-  linkTo={ productItem.url }
-  registerSharedElement={ () => '' }
-/>
-    )) : null;
+    const content = canRender ? data.products.items.map((productItem, indx) => {
+        const pOp = (productItem?.configurable_options || []).map((x) => ({
+            ...x,
+            attribute_code: x.attribute_code,
+            attribute_values: x.values
+        }));
+
+        return (
+            <ProductCard
+              key={ indx.toString() }
+              product={ {
+                  ...productItem,
+                  options: productItem?.options || [],
+                  configurable_options: pOp,
+                  variants: (productItem.variants || []).map((x) => x.product)
+              } }
+              availableVisualOptions={ ['label'] }
+              device={ {} }
+              getAttribute={ () => '' }
+              isBundleProductOutOfStock={ () => false }
+              isConfigurableProductOutOfStock={ () => false }
+              isPreview
+              isWishlistEnabled={ false }
+              productOrVariant={ productItem }
+              thumbnail={ productItem.image.url }
+              linkTo={ productItem.url }
+              registerSharedElement={ () => '' }
+            />
+        );
+    }) : null;
 
     if (loading) {
         return <Loader isLoading />;

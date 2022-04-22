@@ -15,7 +15,8 @@ export const PagebuilderHomePageWrapperComponent = (props) => {
         pageMaskedId,
         endPoint,
         pageData,
-        changeHeaderState
+        changeHeaderState,
+        device
     } = props;
 
     const publishedData = pageData && pageData.publish_items ? pageData : false;

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useCategory } from '../../hook/useCategory';
 
-import './index.scss';
+import '../abc.scss';
 
 export function Category(props) {
     const {
@@ -43,5 +43,5 @@ export function Category(props) {
         return <Loader isLoading />;
     }
 
-    return '';
+    return null;
 }

@@ -4,7 +4,7 @@ import { PageBuilderComponent } from 'simi-pagebuilder-react';
 import { Category } from '../../../Pagebuilder/components/Category/Category';
 import { CategoryScroll } from '../../../Pagebuilder/components/CategoryScroll/CategoryScroll';
 import ProductGrid from '../../../Pagebuilder/components/ProductGrid/ProductGrid';
-import ProductList from '../../../Pagebuilder/components/ProductList/ProductList';
+import { ProductList } from '../../../Pagebuilder/components/ProductList/ProductList';
 import { ProductScroll } from '../../../Pagebuilder/components/ProductScroll/ProductScroll';
 
 /** @namespace ScandiSmpagebuilder/Component/Route/NoMatch/PagebuilderWrapper/PagebuilderNoMatchWrapper/Component/PagebuilderNoMatchWrapperComponent */
@@ -18,14 +18,14 @@ export const PagebuilderNoMatchWrapperComponent = (props) => {
     } = props;
 
     const isValidPage = !!pageData && !!pageData.publish_items;
-    const pageName = pageData.name;
+    const pageName = pageData.title || pageData.name;
     const urlPath = pageData.url_path;
     const dispatchData = isValidPage ? pageData : false;
 
     const breadcrumbs = [
         {
             url: isValidPage ? urlPath : '',
-            name: isValidPage ? __(pageName) : __('Not Found')
+            name: isValidPage ? (pageName) : __('Not Found')
         }
     ];
 
