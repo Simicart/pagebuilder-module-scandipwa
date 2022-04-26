@@ -4,6 +4,8 @@ import React from 'react';
 import { useProducts } from '../../hook/useProducts';
 
 import '../abe.scss';
+import { getIndexedProduct } from '@scandipwa/scandipwa/src/util/Product/Product';
+import {ProductCardWrapper} from "../ProductCardWrapper/ProductCardWrapper";
 
 export const ProductCard = React.lazy(() => import('@scandipwa/scandipwa/src/component/ProductCard/ProductCard.component'));
 
@@ -30,38 +32,18 @@ export const ProductGrid = (props) => {
     });
 
     const content = canRender ? data.products.items.map((productItem, indx) => {
-        const pOp = (productItem?.configurable_options || []).map((x) => ({
-            ...x,
-            attribute_code: x.attribute_code,
-            attribute_values: x.values
-        }));
+        const pOp = getIndexedProduct(productItem);
 
         return (
-            <ProductCard
-              key={ indx.toString() }
-              product={ {
-                  ...productItem,
-                  options: productItem?.options || [],
-                  configurable_options: pOp,
-                  variants: (productItem.variants || []).map((x) => x.product)
-              } }
-              availableVisualOptions={ ['label'] }
-              device={ {} }
-              getAttribute={ () => '' }
-              isBundleProductOutOfStock={ () => false }
-              isConfigurableProductOutOfStock={ () => false }
-              isPreview
-              isWishlistEnabled={ false }
-              productOrVariant={ productItem }
-              thumbnail={ productItem.image.url }
-              linkTo={ productItem.url }
-              registerSharedElement={ () => '' }
+            <ProductCardWrapper
+                key={indx}
+                normalizedProduct={pOp}
             />
         );
     }) : null;
 
     if (loading) {
-        return <Loader isLoading />;
+        return <Loader isLoading/>;
     }
 
     return (
@@ -71,9 +53,9 @@ export const ProductGrid = (props) => {
         //     </div>
         //     <div className="start-grid">
         <>
-                { content }
+            {content}
         </>
-    // </div>
+        // </div>
         // </div>
     );
 };
