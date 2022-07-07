@@ -23,6 +23,7 @@ npm i -g scandipwa-cli
 Starts the development server.
 
 **Features**:
+
 - The page will reload if you make edits.
 - You will also see any lint errors in the console.
 
@@ -33,6 +34,7 @@ Bundles the app into static files for production.
 > **Note**: To bundle your application as valid Magento 2 theme use `--magento` option.
 
 **Features**:
+
 - The build is minified and the filenames include the hashes.
 - The build is optimized for the best performance
 
@@ -44,6 +46,7 @@ To install an extension, run following command:
 scandipwa extension <EXTENSION NAME>
 ```
 
-> **Note**: to create new extension add `--create` option after the command. This will create a new extension package under `packages` folder.
+> **Note**: to create new extension add `--create` option after the command. This will create a new extension package
+> under `packages` folder.
 
-
+* Note: Use node 14 for this 

@@ -21,6 +21,7 @@
     },
     "scripts": {
         "start": "scandipwa-scripts start",
+        "dev": "scandipwa-scripts start",
         "build": "scandipwa-scripts build",
         "postinstall": "scandipwa-scripts link",
         "postupdate": "scandipwa-scripts link"
