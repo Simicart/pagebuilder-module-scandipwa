@@ -1,13 +1,15 @@
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
-import React, { Fragment, useEffect } from 'react';
-import { usePbFinder } from 'simi-pagebuilder-react';
+import React, {Fragment, useEffect, useLayoutEffect} from 'react';
+import {usePbFinder} from 'tapita-pagebuilder-react';
 
-import { useLocation } from '../../Pagebuilder/hook/useLocation';
-import { endPoint, integrationToken } from '../../Pagebuilder/Pagebuilder.config';
+import {useLocation} from '../../Pagebuilder/hook/useLocation';
+import {endPoint, integrationToken} from '../../Pagebuilder/Pagebuilder.config';
 import OriginalNoMatch from './OriginalNoMatch/OriginalNoMatch';
-import { PagebuilderNoMatchWrapperComponent } from './PagebuilderWrapper/PagebuilderNoMatchWrapper.component';
+import {PagebuilderNoMatchWrapperComponent} from './PagebuilderWrapper/PagebuilderNoMatchWrapper.component';
 
 import '../../Pagebuilder/baseStyle.scss';
+import getStore from "@scandipwa/scandipwa/src/util/Store";
+import {useSimplifiedPageFinding} from "../../Pagebuilder/hook/useSimplifiedPageFinding";
 
 export function NoMatch(props) {
     const {
@@ -15,67 +17,59 @@ export function NoMatch(props) {
         },
         cleanUpTransition = () => {
         },
-        currentStoreCode = '',
         changeHeaderState
     } = props || {};
 
+    const state = getStore().getState();
     const {
-        loading: pbLoading,
-        pageMaskedId,
-        findPage,
-        pageData,
-        pathToFind
-    } = usePbFinder({
-        endPoint,
-        integrationToken,
-        storeCode: currentStoreCode,
-        getPageItems: true
-    });
-
+        code: currentStoreCode
+    } = state.ConfigReducer;
     const currentPath = useLocation();
 
-    useEffect(() => {
-        if (!pageMaskedId || currentPath !== pathToFind) {
-            findPage(currentPath);
-        }
-    }, [currentPath, pageMaskedId, findPage]);
+    const {
+        loading,
+        pageMaskedId,
+        pageData,
+        notFound,
+        found
+    } = useSimplifiedPageFinding({
+        currentStoreCode,
+        path: currentPath
+    })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         changeHeaderState({
             name: 'found',
             isHiddenOnMobile: false
         });
     }, []);
 
-    if (pbLoading) {
-        return (
-            <div block="LoaderContainer">
-                <Loader isLoading />
-            </div>
-        );
-    }
 
-    if (pageMaskedId && pageMaskedId !== 'notfound') {
-        changeHeaderState({
-            name: 'found',
-            isHiddenOnMobile: false
-        });
-
+    if (found) {
         return (
             <PagebuilderNoMatchWrapperComponent
-              pageMaskedId={ pageMaskedId }
-              pageData={ pageData }
-              endPoint={ endPoint }
-              updateBreadcrumbs={ updateBreadcrumbs }
-              cleanUpTransition={ cleanUpTransition }
+                pageMaskedId={pageMaskedId}
+                pageData={pageData}
+                endPoint={endPoint}
+                updateBreadcrumbs={updateBreadcrumbs}
+                cleanUpTransition={cleanUpTransition}
             />
         );
     }
 
-    if (pageMaskedId === 'notfound') {
+    if (loading) {
+        return (
+            <div block="LoaderContainer">
+                <Loader isLoading/>
+            </div>
+        );
+    }
+
+    if (notFound) {
         return (
             <OriginalNoMatch
-              { ...props }
+                currentStoreCode={currentStoreCode}
+                {...props}
             />
         );
     }

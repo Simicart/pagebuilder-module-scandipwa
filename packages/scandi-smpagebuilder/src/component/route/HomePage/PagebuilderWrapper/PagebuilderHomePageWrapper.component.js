@@ -1,7 +1,7 @@
 import InstallPrompt from '@scandipwa/scandipwa/src/component/InstallPrompt';
 import { DEFAULT_STATE_NAME } from '@scandipwa/scandipwa/src/component/NavigationAbstract/NavigationAbstract.config';
 import React, { useEffect } from 'react';
-import { PageBuilderComponent } from 'simi-pagebuilder-react';
+import { PageBuilderComponent } from 'tapita-pagebuilder-react';
 
 import { Category } from '../../../Pagebuilder/components/Category/Category';
 import { CategoryScroll } from '../../../Pagebuilder/components/CategoryScroll/CategoryScroll';

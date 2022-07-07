@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { PageBuilderComponent } from 'simi-pagebuilder-react';
+import { PageBuilderComponent } from 'tapita-pagebuilder-react';
 
 import { Category } from '../../../Pagebuilder/components/Category/Category';
 import { CategoryScroll } from '../../../Pagebuilder/components/CategoryScroll/CategoryScroll';
