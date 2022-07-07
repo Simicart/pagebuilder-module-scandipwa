@@ -71,5 +71,4 @@ export const useSimplifiedPageFinding = (props) => {
         found,
         cached
     }
-
 }
