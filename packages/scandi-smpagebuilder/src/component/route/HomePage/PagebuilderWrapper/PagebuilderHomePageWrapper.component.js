@@ -30,7 +30,6 @@ export const PagebuilderHomePageWrapperComponent = (props) => {
 
     return (
         <div block="HomePage">
-            <InstallPrompt />
             <PageBuilderComponent
               key={ pageMaskedId }
               pageData={ publishedData }

@@ -20,7 +20,8 @@ export const LayoutTapita = (props) => {
         productSku,
         productType,
         categoryIDs = [],
-        categoryHandles = []
+        categoryHandles = [],
+        cacheKey = null
     } = props || {}
 
     const [data, setData] = useState(null)
@@ -50,18 +51,21 @@ export const LayoutTapita = (props) => {
             .then(json => {
                 setLoading(false)
                 setData(json)
+                saveCache(cacheKey, json)
             })
             .catch(err => {
                 setLoading(false)
                 setError(err)
             })
-    }, [setLoading, setData, setError, urlBase, integrationToken])
+    }, [setLoading, setData, setError, urlBase, integrationToken, saveCache])
+
+    const cacheData = cacheKey ? getCache(cacheKey) : null
 
     useEffect(() => {
-        if (!lazy) {
+        if (!lazy && !cacheData) {
             fetchPublishedTapita()
         }
-    }, [lazy, fetchPublishedTapita])
+    }, [lazy, fetchPublishedTapita, cacheData])
 
     const state = getStore().getState();
     const {
@@ -69,6 +73,9 @@ export const LayoutTapita = (props) => {
     } = state.ConfigReducer;
 
     const page = useMemo(() => {
+        if (cacheData) {
+            return cacheData
+        }
         if (!data) {
             return null
         }
@@ -171,7 +178,7 @@ export const LayoutTapita = (props) => {
             return parseInt(el2.priority) - parseInt(el1.priority);
         })
         return prioritySortedCatalogs.length > 0 ? prioritySortedCatalogs[0] : null
-    }, [data])
+    }, [data, cacheData])
 
     if (page) {
         return (

@@ -3,7 +3,7 @@ import React, {Fragment, useEffect, useLayoutEffect} from 'react';
 import {usePbFinder} from 'tapita-pagebuilder-react';
 
 import {useLocation} from '../../Pagebuilder/hook/useLocation';
-import {endPoint, integrationToken} from '../../Pagebuilder/Pagebuilder.config';
+import {endPoint} from '../../Pagebuilder/Pagebuilder.config';
 import OriginalNoMatch from './OriginalNoMatch/OriginalNoMatch';
 import {PagebuilderNoMatchWrapperComponent} from './PagebuilderWrapper/PagebuilderNoMatchWrapper.component';
 

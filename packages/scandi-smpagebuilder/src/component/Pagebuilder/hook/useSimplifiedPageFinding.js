@@ -8,14 +8,14 @@ import {CACHE_DURATION, useTapitaCaching} from "./useTapitaCaching";
 export const useSimplifiedPageFinding = (props) => {
     const {
         currentStoreCode = 'default',
-        path ='',
+        path = '',
         cacheDuration = CACHE_DURATION.SHORT,
         cacheKey: _cacheKey = null
     } = props
 
     const [called, setCalled] = useState(false)
     const splitedPath = path.split('/');
-    const currentPath = path==='/'? path:(splitedPath.length>0? splitedPath[splitedPath.length-1]:path)
+    const currentPath = path === '/' ? path : (splitedPath.length > 0 ? splitedPath[splitedPath.length - 1] : path)
 
     const {
         loading: pbLoading,

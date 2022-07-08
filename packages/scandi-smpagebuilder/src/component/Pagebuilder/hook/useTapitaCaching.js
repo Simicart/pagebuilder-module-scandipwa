@@ -83,8 +83,8 @@ export const useTapitaCaching = (props) => {
         return Object.values(cacheStore).filter(c => c).length
     }, [cacheStore])
 
-    const makeKey = useCallback(({storeCode = '', urlPath = ''}) => {
-        return encodeURIComponent(`${storeCode}||${urlPath}`)
+    const makeKey = useCallback(({storeCode = '', type = '', urlPath = ''}) => {
+        return encodeURIComponent(`${storeCode}||${type}||${urlPath}`)
     }, [])
 
     return {

@@ -1,5 +1,7 @@
 import React from "react";
 import {LayoutTapita} from "../LayoutTapita";
+import getStore from "@scandipwa/scandipwa/src/util/Store";
+import {useTapitaCaching} from "../../../hook/useTapitaCaching";
 
 export const ProductLayout = (props) => {
     const dataSource = props && props.instance && props.instance.props && props.instance.props.dataSource
@@ -21,6 +23,19 @@ export const ProductLayout = (props) => {
         return extensionList[0]
     }).filter(handle => handle)
 
+    const state = getStore().getState();
+    const {
+        code: storeCode
+    } = state.ConfigReducer;
+
+    const {makeKey} = useTapitaCaching()
+
+    const cacheKey = makeKey({
+        storeCode: storeCode,
+        type: 'product',
+        urlPath: productSku ? productSku : '?'
+    })
+
     const metaData = {
         productSku,
         productType,
@@ -29,6 +44,6 @@ export const ProductLayout = (props) => {
     }
 
     return (
-        <LayoutTapita {...props} {...metaData}/>
+        <LayoutTapita {...props} {...metaData} cacheKey={cacheKey}/>
     )
 }
