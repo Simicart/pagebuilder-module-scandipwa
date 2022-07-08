@@ -5,7 +5,6 @@ import {CategoryLayout} from "../component/Pagebuilder/components/LayoutTapita/C
 export const CategoryPageScarecrow = (args, callback, instance) => {
     const t = callback()
 
-    console.log('teeee',instance)
     return (
         <>
             <CategoryLayout instance={instance} layoutFilter={1}/>
