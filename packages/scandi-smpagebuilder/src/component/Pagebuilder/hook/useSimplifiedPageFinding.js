@@ -38,12 +38,37 @@ export const useSimplifiedPageFinding = (props) => {
         cacheDuration
     })
 
-    const cacheKey = _cacheKey || makeKey({
-        storeCode: currentStoreCode,
-        urlPath: currentPath
-    })
+    const cacheKey = _cacheKey || makeKey()
 
     const cacheData = getCache(cacheKey)
+
+    const cachedPage = (function () {
+        if (!cacheData) {
+            return null
+        }
+        if (cacheData && cacheData.data) {
+
+            if (currentPath && cacheData.data.spb_page) {
+
+                const {spb_page} = cacheData.data;
+                if (spb_page.items && spb_page.items.length) {
+                    const pbPages = JSON.parse(JSON.stringify(spb_page.items));
+                    pbPages.sort(
+                        (el1, el2) => parseInt(el2.priority) - parseInt(el1.priority),
+                    );
+                    const pageToFind = pbPages.find((item) => {
+                        if (currentStoreCode && item.storeview_visibility) {
+                            const storeViews = item.storeview_visibility.trim().split(',');
+                            if (!storeViews.includes(currentStoreCode)) return false;
+                        }
+                        return item.url_path === currentPath;
+                    });
+                    return pageToFind
+                }
+            }
+        }
+        return null
+    })()
 
     useEffect(() => {
         if (!pageMaskedId && !called && !cacheData) {
@@ -56,7 +81,7 @@ export const useSimplifiedPageFinding = (props) => {
         if (!pbLoading && pageData && !cacheData) {
             saveCache(cacheKey, pageData)
         }
-    }, [pageData, saveCache, cacheKey, cacheData])
+    }, [pageData, cacheKey, cacheData])
 
     const found = !!pageData || !!cacheData
     const notFound = !pbLoading && !found
@@ -66,7 +91,7 @@ export const useSimplifiedPageFinding = (props) => {
         loading: pbLoading,
         pageMaskedId,
         findPage,
-        pageData: cacheData || pageData,
+        pageData: cachedPage || pageData,
         notFound,
         called,
         found,

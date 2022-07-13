@@ -31,8 +31,6 @@ export const LayoutTapita = (props) => {
     const {
         saveCache,
         getCache,
-        makeKey,
-        cacheStore
     } = useTapitaCaching()
 
     const fetchPublishedTapita = useCallback(async () => {
@@ -57,15 +55,15 @@ export const LayoutTapita = (props) => {
                 setLoading(false)
                 setError(err)
             })
-    }, [setLoading, setData, setError, urlBase, integrationToken, saveCache])
+    }, [setLoading, setData, setError, urlBase, cacheKey])
 
     const cacheData = cacheKey ? getCache(cacheKey) : null
 
     useEffect(() => {
-        if (!lazy && !cacheData) {
+        if (!lazy && !cacheData && !loading && !data) {
             fetchPublishedTapita()
         }
-    }, [lazy, fetchPublishedTapita, cacheData])
+    }, [lazy, fetchPublishedTapita, cacheData, cacheKey])
 
     const state = getStore().getState();
     const {
@@ -73,13 +71,11 @@ export const LayoutTapita = (props) => {
     } = state.ConfigReducer;
 
     const page = useMemo(() => {
-        if (cacheData) {
-            return cacheData
-        }
-        if (!data) {
+        const currentData = cacheData ? cacheData.data : data
+        if (!currentData) {
             return null
         }
-        const catalog = data.data && data.data.catalog_builder_page
+        const catalog = currentData.data && currentData.data.catalog_builder_page
         if (!catalog) {
             return null
         }

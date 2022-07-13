@@ -1,11 +1,9 @@
 import {makeId} from "../utils/makeId";
 import {useCallback, useRef} from "react";
-import * as url from "url";
 
 export const CACHE_TYPE = {
     IN_MEM: 1,
 }
-
 
 export const CACHE_DURATION = {
     NO_CACHE: 0,
@@ -19,6 +17,7 @@ export const CACHE_DURATION = {
 export const GLOBAL_CACHING_NAMESPACE = makeId()
 
 const cacheStore = {}
+const ALL_KEY = encodeURIComponent('ALL')
 
 export const useTapitaCaching = (props) => {
     const {
@@ -44,19 +43,21 @@ export const useTapitaCaching = (props) => {
         return count
     }, [cacheStore, usageCountRef])
 
-    const saveCache = useCallback((key, data) => {
+    const saveCache = (key, data) => {
         if (!cacheStore[namespace]) {
             cacheStore[namespace] = {}
         }
-        cacheStore[namespace][key] = {
+        const t = Date.now()
+        const p = {
             data: data,
-            expire: Date.now() + cacheDuration,
+            expire: (t + cacheDuration),
         }
+        cacheStore[namespace][key] = p
         usageCountRef.current += 2
         if (usageCountRef.current > 30) {
             cleanCache()
         }
-    }, [cacheStore, namespace, cacheDuration, usageCountRef, cleanCache])
+    }
 
     const getCache = useCallback((key) => {
         if (!cacheStore[namespace]) {
@@ -69,7 +70,7 @@ export const useTapitaCaching = (props) => {
         const timestamp = Date.now()
         if (retrievalBlock.expire >= timestamp) {
             usageCountRef.current += 1
-            retrievalBlock.expire = timestamp + extendOnVisit
+            retrievalBlock.expire = timestamp + cacheDuration + extendOnVisit
             return retrievalBlock.data
         } else {
             cacheStore[namespace][key] = null
@@ -83,7 +84,11 @@ export const useTapitaCaching = (props) => {
         return Object.values(cacheStore).filter(c => c).length
     }, [cacheStore])
 
-    const makeKey = useCallback(({storeCode = '', type = '', urlPath = ''}) => {
+    const makeKey = useCallback((t = null) => {
+        if (!t) {
+            return ALL_KEY
+        }
+        const {storeCode = '', type = '', urlPath = ''} = t
         return encodeURIComponent(`${storeCode}||${type}||${urlPath}`)
     }, [])
 
