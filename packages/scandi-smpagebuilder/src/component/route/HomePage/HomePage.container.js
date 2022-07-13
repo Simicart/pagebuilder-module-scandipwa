@@ -1,12 +1,11 @@
+import { toggleBreadcrumbs } from '@scandipwa/scandipwa/src/store/Breadcrumbs/Breadcrumbs.action';
+
 import Loader from '@scandipwa/scandipwa/src/component/Loader';
 import {changeNavigationState} from '@scandipwa/scandipwa/src/store/Navigation/Navigation.action';
 import {TOP_NAVIGATION_TYPE} from '@scandipwa/scandipwa/src/store/Navigation/Navigation.reducer';
 import PropTypes from 'prop-types';
 import React, {PureComponent, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {usePbFinder} from 'tapita-pagebuilder-react';
-
-import {useLocation} from '../../Pagebuilder/hook/useLocation';
 import {endPoint, integrationToken} from '../../Pagebuilder/Pagebuilder.config';
 import OriginalHomePage from './OriginalHomePage/OriginalHomePage';
 import {PagebuilderHomePageWrapperComponent} from './PagebuilderWrapper/PagebuilderHomePageWrapper.component';
@@ -14,12 +13,15 @@ import {PagebuilderHomePageWrapperComponent} from './PagebuilderWrapper/Pagebuil
 import '../../Pagebuilder/baseStyle.scss';
 import getStore from "@scandipwa/scandipwa/src/util/Store";
 import {useSimplifiedPageFinding} from "../../Pagebuilder/hook/useSimplifiedPageFinding";
+import {BreadcrumbsDispatcher} from "@scandipwa/scandipwa/src/route/CartPage/CartPage.container";
 
 export function HomePageContainerCore(props) {
     const {
         changeHeaderState,
         currentStoreCode,
-        device
+        device,
+        updateBreadcrumbs,
+        toggleBreadcrumbs
     } = props || {};
 
     const {
@@ -33,10 +35,13 @@ export function HomePageContainerCore(props) {
         path: '/'
     })
 
+
     if (found) {
         return (
             <PagebuilderHomePageWrapperComponent
                 changeHeaderState={changeHeaderState}
+                updateBreadcrumbs={updateBreadcrumbs}
+                toggleBreadcrumbs={toggleBreadcrumbs}
                 pageMaskedId={pageMaskedId}
                 pageData={pageData}
                 endPoint={endPoint}
@@ -70,7 +75,16 @@ export const mapStateToProps = (state) => ({
 
 /** @namespace ScandiSmpagebuilder/Component/Route/HomePage/Container/mapDispatchToProps */
 export const mapDispatchToProps = (dispatch) => ({
-    changeHeaderState: (state) => dispatch(changeNavigationState(TOP_NAVIGATION_TYPE, state))
+    changeHeaderState: (state) => dispatch(changeNavigationState(TOP_NAVIGATION_TYPE, state)),
+    updateBreadcrumbs: (breadcrumbs) => BreadcrumbsDispatcher.then(
+        ({default: dispatcher}) => dispatcher.update(breadcrumbs, dispatch)
+    ),
+    toggleBreadcrumbs: (isActive) => {
+        BreadcrumbsDispatcher.then(
+            ({ default: dispatcher }) => dispatcher.update([], dispatch)
+        );
+        dispatch(toggleBreadcrumbs(isActive));
+    }
 });
 
 /** @namespace ScandiSmpagebuilder/Component/Route/HomePage/Container/HomePageContainer */

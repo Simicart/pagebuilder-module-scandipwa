@@ -71,7 +71,7 @@ export const LayoutTapita = (props) => {
     } = state.ConfigReducer;
 
     const page = useMemo(() => {
-        const currentData = cacheData ? cacheData.data : data
+        const currentData = cacheData ? cacheData : data
         if (!currentData) {
             return null
         }
