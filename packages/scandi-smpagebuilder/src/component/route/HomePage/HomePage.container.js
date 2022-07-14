@@ -29,12 +29,16 @@ export function HomePageContainerCore(props) {
         pageMaskedId,
         pageData,
         notFound,
-        found
+        found,
+        _p,
+        _c,
+        _s,
+        cacheKey,
+        cacheData
     } = useSimplifiedPageFinding({
         currentStoreCode,
         path: '/'
     })
-
 
     if (found) {
         return (

@@ -4,6 +4,7 @@ import getStore from "@scandipwa/scandipwa/src/util/Store";
 import {useTapitaCaching} from "../../../hook/useTapitaCaching";
 
 export const ProductLayout = (props) => {
+    return null
     try {
         const dataSource = props && props.instance && props.instance.props && props.instance.props.dataSource
         const productSku = dataSource && dataSource.sku

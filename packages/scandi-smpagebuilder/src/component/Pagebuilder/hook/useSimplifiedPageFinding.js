@@ -38,7 +38,11 @@ export const useSimplifiedPageFinding = (props) => {
         cacheDuration
     })
 
-    const cacheKey = _cacheKey || makeKey()
+    const cacheKey = _cacheKey || makeKey({
+        storeCode: currentStoreCode,
+        urlPath: path,
+        type: 'single_page'
+    })
 
     const cacheData = getCache(cacheKey)
 
@@ -46,8 +50,9 @@ export const useSimplifiedPageFinding = (props) => {
         if (!cacheData) {
             return null
         }
-        if (cacheData && cacheData.data) {
+        return cacheData
 
+        if (cacheData && cacheData.data) {
             if (currentPath && cacheData.data.spb_page) {
 
                 const {spb_page} = cacheData.data;
@@ -95,6 +100,11 @@ export const useSimplifiedPageFinding = (props) => {
         notFound,
         called,
         found,
-        cached
+        cached,
+        _p: pageData,
+        _c: cachedPage,
+        _s: cacheStore,
+        cacheKey,
+        cacheData
     }
 }
