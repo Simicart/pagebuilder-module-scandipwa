@@ -3,6 +3,8 @@ import {endPoint, integrationToken} from "../Pagebuilder.config";
 import {usePbFinder} from 'tapita-pagebuilder-react';
 import {useEffect} from "react";
 import {CACHE_DURATION, useTapitaCaching} from "./useTapitaCaching";
+import {func} from "prop-types";
+import {matchPathAndCode} from "../utils/matchPathAndCode";
 
 
 export const useSimplifiedPageFinding = (props) => {
@@ -21,7 +23,8 @@ export const useSimplifiedPageFinding = (props) => {
         loading: pbLoading,
         pageMaskedId,
         findPage,
-        pageData
+        pageData,
+        allPages
     } = usePbFinder({
         endPoint,
         integrationToken,
@@ -51,29 +54,35 @@ export const useSimplifiedPageFinding = (props) => {
             return null
         }
         return cacheData
-
-        if (cacheData && cacheData.data) {
-            if (currentPath && cacheData.data.spb_page) {
-
-                const {spb_page} = cacheData.data;
-                if (spb_page.items && spb_page.items.length) {
-                    const pbPages = JSON.parse(JSON.stringify(spb_page.items));
-                    pbPages.sort(
-                        (el1, el2) => parseInt(el2.priority) - parseInt(el1.priority),
-                    );
-                    const pageToFind = pbPages.find((item) => {
-                        if (currentStoreCode && item.storeview_visibility) {
-                            const storeViews = item.storeview_visibility.trim().split(',');
-                            if (!storeViews.includes(currentStoreCode)) return false;
-                        }
-                        return item.url_path === currentPath;
-                    });
-                    return pageToFind
-                }
-            }
-        }
-        return null
     })()
+
+    const realPageData = (function () {
+        if (pageData) {
+            return pageData
+        }
+        if (allPages && allPages.data) {
+            const pagesObj = allPages.data.spb_page
+            const pages = pagesObj.items || []
+
+            return pages.find(page => {
+                const urlPath = page.url_path
+                const storeVisibility = page.storeview_visibility
+                if (storeVisibility &&
+                    !(storeVisibility.trim().split(',').includes(currentStoreCode))) {
+                    return false
+                }
+                return matchPathAndCode({
+                    currentPath: path,
+                    currentStoreCode,
+                    targetPath: urlPath
+                })
+            })
+        }
+    })()
+
+    const found = !!realPageData || !!cacheData
+    const notFound = !pbLoading && !found
+    const cached = !!cacheData
 
     useEffect(() => {
         if (!pageMaskedId && !called && !cacheData) {
@@ -83,25 +92,21 @@ export const useSimplifiedPageFinding = (props) => {
     }, [currentPath, pageMaskedId, findPage]);
 
     useEffect(() => {
-        if (!pbLoading && pageData && !cacheData) {
-            saveCache(cacheKey, pageData)
+        if (!pbLoading && realPageData && !cacheData) {
+            saveCache(cacheKey, realPageData)
         }
     }, [pageData, cacheKey, cacheData])
-
-    const found = !!pageData || !!cacheData
-    const notFound = !pbLoading && !found
-    const cached = !!cacheData
 
     return {
         loading: pbLoading,
         pageMaskedId,
         findPage,
-        pageData: cachedPage || pageData,
+        pageData: cachedPage || realPageData,
         notFound,
         called,
         found,
         cached,
-        _p: pageData,
+        _p: realPageData,
         _c: cachedPage,
         _s: cacheStore,
         cacheKey,
